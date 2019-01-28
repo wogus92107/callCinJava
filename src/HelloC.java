@@ -1,10 +1,12 @@
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.util.Scanner;
 
 public class HelloC {
 
-    public static String exec(String command){
+  /*  public static String exec(String command){
         String result ="";
         Runtime rt = Runtime.getRuntime();
 
@@ -37,10 +39,10 @@ public class HelloC {
 
 
 
-        /*int exitVal = proc.waitFor();
+        int exitVal = proc.waitFor();
         System.out.println("Process exitValue: " + exitVal);
 
-        proc.waitFor();*/
+        proc.waitFor();
         }catch(Exception err){
 
         return "";
@@ -48,16 +50,47 @@ public class HelloC {
 
         return result;
     }
-
+*/
         // proc1.waitFor();//process1이 끝날때까지 대기
 
 
 
 
-    public static void main(String[] args) {
-            exec("sudo ./demo runtext16.ppm");
 
 
-    }
+
+        public static void main(String args[]) {
+
+            try {
+                String s;
+                Process p;
+                ProcessBuilder pb = new ProcessBuilder();
+
+                p=Runtime.getRuntime().exec("ls");
+                BufferedReader br = new BufferedReader(
+                        new InputStreamReader(p.getInputStream()));
+                while ((s = br.readLine()) != null){
+                    System.out.println("line: " + s);}
+
+                InputStream is = System.in;
+                OutputStream os = p.getOutputStream();
+                int data = is.read();
+                while(data != -1){
+                    os.
+                    os.write(data);
+                    os.flush();
+                }
+
+
+
+
+
+
+                System.out.println ("exit: " + p.exitValue());
+              //  p.destroy();
+               p.wait(100);
+            } catch (Exception e) {}
+        }
+
 
 }
